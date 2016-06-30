@@ -1,0 +1,3 @@
+define('@Event',function(){
+
+});
