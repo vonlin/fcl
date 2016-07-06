@@ -1,3 +1,3 @@
-define('@build',function(){
+define('@Build',function(){
 
 });

@@ -1,0 +1,82 @@
+{
+    "result": "OK",
+    "msg": null,
+    "total": 1,
+    "page": 1,
+    "size": 20,
+    "qss": [
+        {
+            "managerCode": "YCXT",
+            "mangerName": "粤财信托",
+            "year": "2016",
+            "month": "06",
+            "projectCount": 23,
+            "reportStyle": "本期",
+            "reportFileName": "粤财信托-信托项目全要素本期报表-201606"
+        },
+        {
+            "managerCode": "ZXXT",
+            "mangerName": "中信信托",
+            "year": "2016",
+            "month": "06",
+            "projectCount": 38,
+            "reportStyle": "本期",
+            "reportFileName": "中信信托-信托项目全要素本期报表-201606"
+        },
+        {
+            "managerCode": "YCXT",
+            "mangerName": "粤财信托",
+            "year": "2016",
+            "month": "05",
+            "projectCount": 227,
+            "reportStyle": "本期",
+            "reportFileName": "粤财信托-信托项目全要素本期报表-201605"
+        },
+        {
+            "managerCode": "ZXXT",
+            "mangerName": "中信信托",
+            "year": "2016",
+            "month": "05",
+            "projectCount": 40,
+            "reportStyle": "本期",
+            "reportFileName": "中信信托-信托项目全要素本期报表-201605"
+        },
+        {
+            "managerCode": "YCXT",
+            "mangerName": "粤财信托",
+            "year": "2016",
+            "month": "04",
+            "projectCount": 4,
+            "reportStyle": "本期",
+            "reportFileName": "粤财信托-信托项目全要素本期报表-201604"
+        },
+        {
+            "managerCode": "ZXXT",
+            "mangerName": "中信信托",
+            "year": "2016",
+            "month": "04",
+            "projectCount": 42,
+            "reportStyle": "本期",
+            "reportFileName": "中信信托-信托项目全要素本期报表-201604"
+        },
+        {
+            "managerCode": "YCXT",
+            "mangerName": "粤财信托",
+            "year": "2016",
+            "month": "03",
+            "projectCount": 2,
+            "reportStyle": "本期",
+            "reportFileName": "粤财信托-信托项目全要素本期报表-201603"
+        },
+        {
+            "managerCode": "ZXXT",
+            "mangerName": "中信信托",
+            "year": "2016",
+            "month": "03",
+            "projectCount": 22,
+            "reportStyle": "本期",
+            "reportFileName": "中信信托-信托项目全要素本期报表-201603"
+        }
+    ],
+    "totalRecord": 8
+}
