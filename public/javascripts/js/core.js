@@ -3,6 +3,7 @@
  */
 define(function(){
     var _configs = null;
+    var scope = {};
     var Core = {
         config : function(configs){
             _configs = configs;
@@ -26,6 +27,6 @@ define(function(){
         }
     };
 
-
+    window.scope = scope;
     return Core;
 });

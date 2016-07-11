@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 2016/7/4.
  */
-require(['@grid','@service'],function(Grid,Service){
+require(['#grid','#service'],function(Grid,Service){
     var grid = new Grid({
         url : 'list',
         renderId : 'gridDemo',
@@ -23,7 +23,6 @@ require(['@grid','@service'],function(Grid,Service){
                 key : 'month',
                 value : '月',
                 format : function(data){
-                    console.log(data);
                     return "猴年马月";
                 }
             },
@@ -36,8 +35,8 @@ require(['@grid','@service'],function(Grid,Service){
                 value : '操作',
                 type : 'operate',
                 operates : [
-                    {key : 'view',value : '查看',action:function(){alert(1111)}},
-                    {key : 'modify',value : '修改',action:function(){alert(1111)}}
+                    {key : 'view',value : '查看',action:function(data){console.log(data.month)}},
+                    {key : 'modify',value : '修改',action:function(data){console.log(data.managerCode)}}
                 ]
             }
         ]
@@ -52,7 +51,10 @@ require(['@grid','@service'],function(Grid,Service){
     //    }
     //});
 
-    window.addEventListener("DOMContentLoaded",function(){
-        alert("laoded");
-    },false);
+    //$(document).on("click","a",function(){
+    //    $("body").append("<div>adfadf</div>");
+    //});
+    //$("[e]").each(function(){
+    //
+    //});
 });

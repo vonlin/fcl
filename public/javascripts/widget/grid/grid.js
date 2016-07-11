@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 2016/6/22.
  */
-define(['@service'],function(s){
+define(['#service','#util'],function(s,util){
     'use strict';
     var Grid = function(options){
         var _defaults = {
@@ -44,7 +44,7 @@ define(['@service'],function(s){
                     var tdtxt = '';
                     if(head.type && head.type === 'operate'){
                         //operate cols
-                        tdtxt = this.operate(head.operates);
+                        tdtxt = this.operate(head.operates,rowData);
                     }else{
                         //standard cols
                         tdtxt = rowData[head.key];
@@ -68,13 +68,23 @@ define(['@service'],function(s){
             tpl += '</tr></thead>';
             return tpl;
         },
-        operate : function(ops){
+        operate : function(ops,data){
             var rtnText = '';
             for(var i=0;i < ops.length; i++){
                 var op = ops[i];
-                rtnText += '<a href="#" @e="click!optClick">' + op.value + '</a>';
+                var temp = {};
+                var uuid = util.generateUUID();
+                temp[uuid] = op.action;
+                rtnText += '<a href="#" fcl-event="click!optClick_' + op.key + '_' + uuid + '">' + op.value + '</a>';
+                scope["optClick_" + op.key + "_" + uuid] = function(dom,evt){
+                    temp[uuid](data);
+                };
             }
+
             return rtnText;
+        },
+        bindEvent : function(){
+            //scope.action =
         }
     };
 

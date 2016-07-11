@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 2016/7/4.
  */
-define(['@util','@core'],function(Util,Core){
+define(['#util','#core'],function(Util,Core){
     var headers = {
         'Content-Type' : 'application/x-www-form-urlencoded',
         'Accept-Language' : 'en;q=1, fr;q=0.9, de;q=0.8, zh-Hans;q=0.7, zh-Hant;q=0.6, ja;q=0.5',
