@@ -35,8 +35,15 @@ require(['#grid','#service'],function(Grid,Service){
                 value : '操作',
                 type : 'operate',
                 operates : [
-                    {key : 'view',value : '查看',action:function(data){console.log(data.month)}},
-                    {key : 'modify',value : '修改',action:function(data){console.log(data.managerCode)}}
+                    {key : 'view',value : '查看',action:function(data){
+                        alert("查看")
+                    }},
+                    {key : 'modify',value : '修改',action:function(data){
+                        alert("修改")
+                    }},
+                    {key : 'delete',value : '删除',action:function(data){
+                        console.log(data)
+                    }}
                 ]
             }
         ]
