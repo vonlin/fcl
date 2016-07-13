@@ -1,9 +1,18 @@
-.wg-grid-table > th{
+.wg-grid-table tr,.wg-grid-table td{
+    border : 0;
+}
+.wg-grid-table > tbody > th{
     padding : 5px 5px;
 }
 .wg-grid-table > tr{
 
 }
-.wg-grid-table > tr > td{
+.wg-grid-table > tbody > tr > td{
     padding : 5px 5px;
+}
+.wg-grid-table > tbody > tr{
+    padding : 5px 5px;
+}
+.wg-grid-table > tbody > tr > td > a{
+    margin-right : 10px;
 }

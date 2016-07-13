@@ -1308,17 +1308,17 @@ var requirejs, require, define;
                     var temp = {};
                     eachProp(value,function(val,p){
                         var cssUrl;
-                        mixin(value[p], val, true, true);
-
                         if(val.indexOf("!CSS") != -1){
-                            cssUrl = val.replace("!CSS","") + ".css";
+                            cssUrl = val.replace("!CSS","").replace("widget/","") + ".css";
                             var _css = document.createElement("link");
                             _css.rel = "stylesheet";
                             _css.href = cssUrl;
                             _css.type = "text/css";
                             document.getElementsByTagName("head")[0].appendChild(_css);
+                            value[p] = val.replace("!CSS","");
                         }
                     });
+
                     if (objs[prop]) {
                         if (!config[prop]) {
                             config[prop] = {};
