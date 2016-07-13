@@ -1,0 +1,9 @@
+.wg-grid-table > th{
+    padding : 5px 5px;
+}
+.wg-grid-table > tr{
+
+}
+.wg-grid-table > tr > td{
+    padding : 5px 5px;
+}

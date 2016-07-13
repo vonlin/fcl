@@ -11,7 +11,7 @@ require.config({
         '#service' : 'service',
         '#util' : 'util',
         '#build' : 'build',
-        '#grid' : '../widget/grid/grid'
+        '#grid' : '../widget/grid/grid!CSS'
     },
     shim : {
         //'fcl.service' : ['#util','#core']

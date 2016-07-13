@@ -1303,6 +1303,22 @@ var requirejs, require, define;
                     };
 
                 eachProp(cfg, function (value, prop) {
+                    //console.log(value);
+                    //if the value is Object ,so each the value's properties,find the value of has !CSS
+                    var temp = {};
+                    eachProp(value,function(val,p){
+                        var cssUrl;
+                        mixin(value[p], val, true, true);
+
+                        if(val.indexOf("!CSS") != -1){
+                            cssUrl = val.replace("!CSS","") + ".css";
+                            var _css = document.createElement("link");
+                            _css.rel = "stylesheet";
+                            _css.href = cssUrl;
+                            _css.type = "text/css";
+                            document.getElementsByTagName("head")[0].appendChild(_css);
+                        }
+                    });
                     if (objs[prop]) {
                         if (!config[prop]) {
                             config[prop] = {};

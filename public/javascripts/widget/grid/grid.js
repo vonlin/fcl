@@ -3,9 +3,6 @@
  */
 define(['#service','#util'],function(s,util){
     'use strict';
-    var optevts = [];
-    var evts = {};
-    var datas = {};
     var model = {
         opts : [],
         evts : {},
@@ -29,13 +26,14 @@ define(['#service','#util'],function(s,util){
                 data : options.params,
                 type : "json",
                 success : function(data){
-                    var tpl = '<table>';
+                    var tpl = '<table border="0" class="wg-grid-table">';
+                    data = data[options.data];
                     tpl += self.thead(options.maps);
-                    tpl += self.tbody(options.maps,data[options.data]);
+                    tpl += self.tbody(options.maps,data);
                     tpl += '</table>';
 
                     $("#" + options.renderId).html(tpl);
-                    self.bindEvents(model.opts);
+                    self.bindEvents(data);
                 },
                 error : function(XMLHttpRequest,textStatus,errorThrown){
 
@@ -53,9 +51,7 @@ define(['#service','#util'],function(s,util){
                     var tdtxt = '';
                     if(head.type && head.type === 'operate'){
                         //operate cols
-                        var dataId = util.generateUUID();
-                        model.datas[dataId] = rowData;
-                        tdtxt = this.operate(head.operates,rowData,dataId);
+                        tdtxt = this.operate(head.operates,rowData);
                     }else{
                         //standard cols
                         tdtxt = rowData[head.key];
@@ -79,35 +75,21 @@ define(['#service','#util'],function(s,util){
             tpl += '</tr></thead>';
             return tpl;
         },
-        operate : function(ops,data,dataId){
+        operate : function(ops,data){
             var rtnText = '';
-            var cbs = {};
-            var tempArr = [];
             for(var i=0;i < ops.length; i++){
-                var temp = {};
                 var op = ops[i];
-
                 var uuid = util.generateUUID();
-                rtnText += '<a href="#" fcl-event="click!optClick_' + op.key + '_' + uuid + '" data-eid="' + uuid + '" data-dataid="' + dataId + '">' + op.value + '</a>';
-                temp["uuid"] = uuid;
-                var s = op.key;
+                rtnText += '<a href="#" fcl-event="click!optClick" data-eid="' + uuid + '">' + op.value + '</a>';
                 model.evts[uuid] = op.action;
-                cbs[s] = temp;
-
             }
-            model.opts.push(cbs);
             return rtnText;
         },
-        bindEvents : function(opts){
-            for(var i=0;i<opts.length;i++){
-                var opt = opts[i];
-                for(var p in opt){
-                    var _o = opt[p];
-                    scope["optClick_" + p + "_" + _o.uuid] = function(dom,evt){
-                        model.evts[dom.attr("data-eid")](model.datas[dom.attr("data-dataid")]);
-                    };
-                }
-            }
+        bindEvents : function(data){
+            scope["optClick"] = function(dom,evt){
+                var index = (dom.closest("tr"))[0].rowIndex;
+                model.evts[dom.attr("data-eid")](data[index-1]);
+            };
         }
     };
 

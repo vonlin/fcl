@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 2016/7/4.
  */
-require(['#grid','#service'],function(Grid,Service){
+require(['#grid!grid.css','#service'],function(Grid,Service){
     var grid = new Grid({
         url : 'list',
         renderId : 'gridDemo',
