@@ -26,7 +26,7 @@ define(['#service','#util'],function(s,util){
                 data : options.params,
                 type : "json",
                 success : function(data){
-                    var tpl = '<table border="0" class="wg-grid-table">';
+                    var tpl = '<table border="0" cellpadding="0" cellspacing="0" class="wg-grid-table">';
                     data = data[options.data];
                     tpl += self.thead(options.maps);
                     tpl += self.tbody(options.maps,data);
@@ -70,7 +70,7 @@ define(['#service','#util'],function(s,util){
         thead : function(maps){
             var tpl = '<thead><tr>';
             for(var i=0;i < maps.length;i++){
-                tpl += '<th title="' + maps[i].value + '">' + maps[i].value + '</th>';
+                tpl += '<th title="' + maps[i].value + '" class="' + maps[i].cls + '">' + maps[i].value + '</th>';
             }
             tpl += '</tr></thead>';
             return tpl;

@@ -17,7 +17,7 @@ define(function(){
         },
         loadJS : function(){
             var _script = document.getElementById("require");
-            var pageJS = _script.getAttribute("pageJS");
+            var pageJS = _script.getAttribute("data-js");
             if(pageJS){
                 var script = document.createElement("script");
                 script.src = pageJS;
