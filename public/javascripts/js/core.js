@@ -1,10 +1,20 @@
-/**
- * Created by Administrator on 2016/7/4.
- */
-define(function(){
+define(["#build"],function(build){
     var _configs = null;
-    var scope = {};
+    var timestamp = new Date().getTime();
+    window[timestamp] = {};
+
     var Core = {
+        Ready : function(cb){
+            build.init();
+            $(document).ready(function(){
+                if(typeof cb === 'function'){
+                    cb();
+                }
+            });
+        },
+        registScope : function(){
+            return window[timestamp];
+        },
         config : function(configs){
             _configs = configs;
             this.loadJS();
@@ -26,7 +36,5 @@ define(function(){
             }
         }
     };
-
-    window.scope = scope;
     return Core;
 });

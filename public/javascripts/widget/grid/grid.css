@@ -1,26 +1,123 @@
-.wg-grid-table{
-    width:100%;
-    height:auto;
+.wg-g-disabled{
+    color: #a9a9a9;
+    background-color:#FAFAFA;
+    cursor:not-allowed;
 }
-.wg-grid-table tr,.wg-grid-table td{
-    border : 0;
-    padding : 10px 20px;
+
+
+.wg-grid-table {
+    width: 100%;
+    height: auto;
+}
+
+.wg-grid-table tr, .wg-grid-table td {
+    border: 0;
+    padding: 10px 20px;
     border-bottom-width: 1px;
     border-bottom-color: #e9e9e9;
     border-bottom-style: solid;
 }
-.wg-grid-table > thead >tr > th{
-    background-color : #2bd553;
-    padding : 10px 20px;
+
+.wg-grid-table > thead > tr > th {
+    background-color: #2bd553;
+    padding: 10px 20px;
 }
-.wg-grid-table > tbody > tr > td{
+
+.wg-grid-table > tbody > tr > td {
 }
-.wg-grid-table > tbody > tr:nth-child(2n){
+
+.wg-grid-table > tbody > tr:nth-child(2n) {
     background: #FAFAFA;
 }
-.wg-grid-table > tbody > tr > td > a{
-    margin-right : 10px;
+
+.wg-grid-table > tbody > tr > td > a {
+    margin-right: 10px;
 }
 
+.wg-grid-pager {
+    width: 100%;
+    height: 50px;
+    padding: 10px 0;
+    margin-top: 10px;
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: #afafaf;
+}
+.wg-grid-pager em{
+    font-style: normal;
+}
+.wg-grid-pager .pager-area-num,
+.wg-grid-pager .pager-area-opt{
+    width:auto;
+    height:auto;
+    display:inline-block;
+    margin-right: 20px;
+}
 
-.wg-grid-po
+.wg-grid-pager .pager-area-num > div,
+.wg-grid-pager .pager-area-opt > div{
+    display:inline-block;
+    height: 26px;
+    border: 1px solid #17b384;
+    line-height: 16px;
+    padding: 5px 0;
+    text-align: center;
+    margin-right: 6px;
+}
+
+.wg-grid-pager .pager-area-opt > span{
+    display: inline-block;
+    margin-right: 10px;
+}
+.wg-grid-pager .pager-area-opt > input[type=text]{
+    width:60px;
+    height:26px;
+    padding:0 5px;
+    border: 1px solid #17b384;
+    margin-right: 10px;
+}
+
+.wg-grid-pager .pager-area-opt > input[type=button]{
+    width:50px;
+    height:26px;
+    padding:0 5px;
+    border: none;
+    margin-right: 10px;
+    cursor:pointer;
+    background-color: #17b384;
+    color:#fff;
+    outline: none;
+}
+
+.wg-grid-pager .pager-prev {
+    width: 60px;
+}
+
+.wg-grid-pager .pager-next {
+    width: 60px;
+}
+
+.wg-grid-pager .pager-current {
+    background-color: #17b384;
+}
+
+.wg-grid-pager .pager-ellipsis {
+    width: 30px;
+}
+
+.wg-grid-pager .pager-num {
+    width: 30px;
+}
+
+.pager-area-num .pager-num:hover,
+.pager-area-num .pager-prev:hover,
+.pager-area-num .pager-next:hover{
+    cursor:pointer;
+    background-color: #17b384;
+}
+
+.pager-area-num .pager-prev.wg-g-disabled:hover,
+.pager-area-num .pager-next.wg-g-disabled:hover{
+    cursor:not-allowed;
+    background: none;
+}

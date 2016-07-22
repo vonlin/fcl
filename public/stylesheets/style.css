@@ -1,6 +1,6 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 12px "Microsoft YaHei", Helvetica, Arial, sans-serif;
 }
 
 body *{
@@ -23,4 +23,13 @@ a {
 }
 .g-ta-right {
     text-align : right;
+}
+.g-f-l{
+    float:left;
+}
+.g-f-r{
+    float:right;
+}
+.g-hide{
+    display:none;
 }

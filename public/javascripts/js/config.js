@@ -18,7 +18,7 @@ require.config({
     }
 });
 
-require(['#core','jquery','#event','#build'],function(Core,$){
+require(['#core','jquery','#build'],function(Core,$){
     Core.config({
         localApi : {
             'list' : 'data.json'

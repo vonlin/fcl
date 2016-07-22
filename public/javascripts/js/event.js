@@ -1,16 +1,32 @@
 define(function(){
+
     var event = {
-        batchBinds : function(doms){
+        batchBinds : function(evts){
+            var doms = evts.doms;
+            var attr = evts.attr;
             doms.each(function(i,e){
-                var type = $(e).attr("fcl-event").split("!")[0];
-                var handler = $(e).attr("fcl-event").split("!")[1];
+                var type = $(e).attr(attr).split("!")[0];
+                var handler = $(e).attr(attr).split("!")[1];
                 $(e).off(type).on(type,function(evt){
+                    var scope = core.registScope();
                     scope[handler]($(this),evt);
+
+                    //if the control
+                    if(attr.indexOf("control") != -1){
+                        var models = $("[fcl-model]");
+
+                        models.each(function(i,e){
+                            var model = $(e).attr("fcl-model");
+                            switch($(e)[0].nodeName.toLowerCase()){
+                                case 'input' : $(e).val(scope[model]);
+                            }
+                        });
+
+                    }
                 });
             });
         }
     };
 
     return event;
-    //document.addEventListener("DOMNodeInserted",function(){console.log(111)},false)
 });
