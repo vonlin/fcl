@@ -33,6 +33,25 @@ define(['#event','jquery'], function (evt,$) {
                 evt.batchBinds(evts[i]);
             }
         },
+        setModel : function(data){
+            data = {
+                a1 : {
+                    b : 'c'
+                },
+                a2 : "b2"
+            };
+            for(var p in data){
+                if(typeof data[p] === 'object'){
+
+                }else{
+                    var el = $("[fcl-model='" + p + "']");
+                    var nodeName = el[0].nodeName.toLocaleLowerCase();
+                    if(nodeName == "input" || nodeName == "textarea"){
+
+                    }
+                }
+            }
+        } ,
         initModels : function(){
 
         },
