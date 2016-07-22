@@ -132,6 +132,6 @@ require(['#grid','#service','#core'],function(GridLoader,Service,core){
     };
 
     core.Ready(function(){
-        //GridLoader.load(ops);
+        GridLoader.load(ops);
     });
 });
