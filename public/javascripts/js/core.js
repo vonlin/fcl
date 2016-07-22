@@ -1,11 +1,10 @@
-define(["#build"],function(build){
+define(function(){
     var _configs = null;
     var timestamp = new Date().getTime();
     window[timestamp] = {};
 
     var Core = {
         Ready : function(cb){
-            build.init();
             $(document).ready(function(){
                 if(typeof cb === 'function'){
                     cb();

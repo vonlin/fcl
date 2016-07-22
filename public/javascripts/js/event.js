@@ -1,4 +1,5 @@
-define(function(){
+define(['#core'],function(core){
+    var scope = core.registScope();
 
     var event = {
         batchBinds : function(evts){
@@ -8,7 +9,6 @@ define(function(){
                 var type = $(e).attr(attr).split("!")[0];
                 var handler = $(e).attr(attr).split("!")[1];
                 $(e).off(type).on(type,function(evt){
-                    var scope = core.registScope();
                     scope[handler]($(this),evt);
 
                     //if the control
