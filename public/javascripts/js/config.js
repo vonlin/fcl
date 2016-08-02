@@ -11,6 +11,7 @@ require.config({
         '#service' : 'service',
         '#util' : 'util',
         '#build' : 'build',
+        '#filter' : 'filter',
         '#grid' : '../widget/grid/grid!CSS'
     },
     shim : {

@@ -1,4 +1,6 @@
-define(['#event','jquery'], function (evt,$) {
+define(['#event','#filter','jquery','#core'], function (evt , filter , $, core) {
+    var scope = core.registScope();
+
     var _fcls = {
         evtDoms : [],
         modelDoms : [],
@@ -34,26 +36,49 @@ define(['#event','jquery'], function (evt,$) {
             }
         },
         setModel : function(data){
-            data = {
-                a1 : {
-                    b : 'c'
-                },
-                a2 : "b2"
-            };
-            for(var p in data){
-                if(typeof data[p] === 'object'){
+            //data = {
+            //    a : {
+            //        c : {
+            //            d : {
+            //                mangerName : "fouth"
+            //            }
+            //        },
+            //        mangerName : 'inner',
+            //        b : {
+            //            mangerName : "thrid"
+            //        }
+            //    },
+            //    _id : "adfasfasfdasfasdfasfd",
+            //    mangerName  : "outer"
+            //};
 
-                }else{
-                    var el = $("[fcl-model='" + p + "']");
-                    var nodeName = el[0].nodeName.toLocaleLowerCase();
-                    if(nodeName == "input" || nodeName == "textarea"){
+            var dataDoms = _fcls.dataDoms;
+            var i = 0,m=data;//m == Model
+            for(;i<dataDoms.length;i++){
+                var _dom = dataDoms[i],
+                    attrValue = $(_dom).attr("fcl-data"),
+                    attrIterator = attrValue.split("|")[0],
+                    filterFn = attrValue.split("|")[1];
 
+                try{
+                    var dataValue = eval(attrIterator);
+                    switch(_dom.nodeName.toLowerCase()){
+                        case "input":
+                        case "textarea" :
+                            if(filterFn && typeof filter[filterFn] === 'function'){
+                                dataValue = filter[filterFn](dataValue);
+                            }
+                            $(_dom).val(dataValue);
                     }
+                }catch(e){
+                    console.info(e);
                 }
             }
         } ,
-        initModels : function(){
-
+        initModels : function(modelDoms){
+            evt.regist("input",modelDoms,function(evt){
+                scope[$(this).attr("fcl-model")] = $(this).val();
+            });    // 核心事件对象
         },
         initData : function(){
 

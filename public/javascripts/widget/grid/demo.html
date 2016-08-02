@@ -12,24 +12,24 @@
 </head>
 <body>
 <section style="margin-bottom:20px;">
-    <label>编码：</label><input id="code"/>
-    <label>名称：</label><input id="name"/>
-    <label>年：</label><input id="year"/>
-    <label>月：</label><input id="month"/>
-    <label>文件名：</label><input id="filename"/>
+    <label>编码：</label><input id="code" fcl-model="code"/>
+    <label>名称：</label><input id="name" fcl-model="name"/>
+    <label>年：</label><input id="year" fcl-model="year"/>
+    <label>月：</label><input id="month" fcl-model="month"/>
+    <label>文件名：</label><input id="filename" fcl-model="filename"/>
     <input type="button" value="增加" fcl-event="click!add"/>
 </section>
 
-<div id="update" class="g-hide">
+<div id="update" class="g-hided">
     <div style="width:100%;height:100%;background:black;opacity:.3;position:absolute;top:0;left:0"></div>
     <div style="width:90%;height:100px;position:absolute;background:white;padding-top:45px;padding-left:50px;">
         <section>
-            <label>ID：</label><input id="_id"/>
-            <label>编码：</label><input id="codeu"/>
-            <label>名称：</label><input id="nameu"/>
-            <label>年：</label><input id="yearu"/>
-            <label>月：</label><input id="monthu"/>
-            <label>文件名：</label><input id="filenameu"/>
+            <label>ID：</label><input id="_id" fcl-data="m._id" fcl-model="_id"/>
+            <label>编码：</label><input id="codeu" fcl-data="m.codeu" fcl-model="codeu"/>
+            <label>名称：</label><input id="nameu" fcl-data="m.a.c.d.mangerName|filterFn" fcl-model="nameu"/>
+            <label>年：</label><input id="yearu" fcl-data="m._id" fcl-model="_id"/>
+            <label>月：</label><input id="monthu" fcl-data="m._id" fcl-model="_id"/>
+            <label>文件名：</label><input id="filenameu" fcl-data="m._id" fcl-model="_id"/>
             <input type="button" value="提交修改" fcl-event="click!submitUpdate"/>
         </section>
     </div>

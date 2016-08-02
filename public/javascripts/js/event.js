@@ -2,6 +2,10 @@ define(['#core'],function(core){
     var scope = core.registScope();
 
     var event = {
+        regist : function(type, doms, handle){
+            //之所以不直接用jquery绑定，可以做一些特殊处理，封装一些额外的事件
+            $(doms).on(type,handle || function(){});
+        },
         batchBinds : function(evts){
             var doms = evts.doms;
             var attr = evts.attr;

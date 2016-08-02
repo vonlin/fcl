@@ -1,13 +1,13 @@
 /**
  * Created by Administrator on 2016/7/4.
  */
-require(['#grid','#service','#core'],function(GridLoader,Service,core){
+require(['#grid','#service','#core','#build'],function(GridLoader,Service,core,build){
     var scope = core.registScope();
 
     var ops = {
-        url : '/wg_grid/getList',
+        url : 'list',
         renderId : 'gridDemo',
-        data : 'list',
+        data : 'qss',
         params : {
             size : 11,
             page : 1
@@ -49,12 +49,13 @@ require(['#grid','#service','#core'],function(GridLoader,Service,core){
                                 id : data._id
                             },
                             success : function(data){
-                                $("#_id").val(data.data._id);
-                                $("#codeu").val(data.data.managerCode);
-                                $("#nameu").val(data.data.mangerName);
-                                $("#yearu").val(data.data.year);
-                                $("#monthu").val(data.data.month);
-                                $("#filenameu").val(data.data.reportFileName);
+                                build.setModel(data.data);
+                                //$("#_id").val(data.data._id);
+                                //$("#codeu").val(data.data.managerCode);
+                                //$("#nameu").val(data.data.mangerName);
+                                //$("#yearu").val(data.data.year);
+                                //$("#monthu").val(data.data.month);
+                                //$("#filenameu").val(data.data.reportFileName);
                                 $("#update").removeClass("g-hide");
                             }
                         });
@@ -133,5 +134,6 @@ require(['#grid','#service','#core'],function(GridLoader,Service,core){
 
     core.Ready(function(){
         GridLoader.load(ops);
+        build.setModel({});
     });
 });
