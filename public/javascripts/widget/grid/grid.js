@@ -36,8 +36,8 @@ define(['#service','#util','#core'],function(s,util,core){
                     var tpl = '<table border="0" cellpadding="0" cellspacing="0" class="wg-grid-table">';
                     var list = data[options.data];
                     if(list.length){
-                        tpl += self.thead(options.maps);
-                        tpl += self.tbody(options.maps,list);
+                        tpl += self.thead(options);
+                        tpl += self.tbody(options,list);
                         tpl += '</table>';
                         tpl += self.pager(options,data);
                         self.bindEvents(list);
@@ -52,7 +52,9 @@ define(['#service','#util','#core'],function(s,util,core){
             });
 
         },
-        tbody : function(maps,dataList){
+        tbody : function(options,dataList){
+            var maps = options.maps;
+            var draggableAttr = options.draggable ? 'draggable="true"' : '';
             var tpl = '<tbody>';
             for(var rowIndex = 0;rowIndex < dataList.length;rowIndex++){
                 var rowData = dataList[rowIndex];
@@ -71,17 +73,19 @@ define(['#service','#util','#core'],function(s,util,core){
                         }
                     }
 
-                    tpl += '<td>' + tdtxt + '</td>'
+                    tpl += '<td ' + draggableAttr + '>' + tdtxt + '</td>'
                 }
                 tpl += '</tr>';
             }
             tpl += '</tbody>';
             return tpl;
         },
-        thead : function(maps){
+        thead : function(options){
+            var maps = options.maps;
+            var draggableAttr = options.draggable ? 'draggable="true"' : '';
             var tpl = '<thead><tr>';
             for(var i=0;i < maps.length;i++){
-                tpl += '<th title="' + maps[i].value + '" class="' + maps[i].cls + '">' + maps[i].value + '</th>';
+                tpl += '<th title="' + maps[i].value + '" class="' + (maps[i].cls || "") + '" ' + draggableAttr +'>' + maps[i].value + '</th>';
             }
             tpl += '</tr></thead>';
             return tpl;
