@@ -127,13 +127,25 @@ require(['#grid','#service','#core','#build'],function(GridLoader,Service,core,b
         });
     };
 
-    scope["count"]=0;
+    var count=0;
     scope.addcount = function(){
-        scope.count++ ;
+        build.setModel({count:1});
     };
+
+
+    scope.aaa = function(){
+        $("body").append("<button fcl-event='click!ccc'>ccc</button>")
+    }
+
+    scope.bbb = function(){
+        console.log(222)
+    }
+    scope.ccc = function(){
+        console.log(333)
+    }
 
     core.Ready(function(){
         GridLoader.load(ops);
-        build.setModel({});
+        //build.setModel({});
     });
 });

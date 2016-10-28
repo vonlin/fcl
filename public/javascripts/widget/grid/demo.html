@@ -5,8 +5,9 @@
     <title></title>
     <link href="../../../stylesheets/style.css" rel="stylesheet" type="text/css">
     <script src="../../jslib/require.js" type="text/javascript" data-main="../../js/config.js" data-js="demo.js" id="require"></script>
+    <script src="../../jslib/jquery.min.js"></script>
 </head>
-<body draggable="true" id="drop">
+<body>
 <section style="margin-bottom:20px;">
     <label>编码：</label><input id="code" fcl-model="code"/>
     <label>名称：</label><input id="name" fcl-model="name"/>
@@ -32,89 +33,13 @@
 </div>
 
 <div style="width: 1400px;height:800px;" id="gridDemo" class="g-hide"></div>
-<div style="width:200px;height:200px;background-color:#ddd;display: inline-block;" draggable="true" id="drag"></div>
+<button fcl-event="click!aaa">click</button>
+<button fcl-event="click!bbb">click</button>
 
 <!--<div style="width:200px;height:200px;background-color:#f0f0f0;display: inline-block;margin-left: 400px;" draggable="true"></div>-->
-<!--<input fcl-model="count"/>-->
-<!--<input fcl-model="count"/>-->
-<!--<button fcl-control="click!addcount">click</button>-->
-<!--<button fcl-control="click!addcount">click2</button>-->
+<input fcl-set="count" id="con"/>
+<input fcl-set="count.b.c"/>
+<button fcl-event="click!addcount">click11</button>
+<button fcl-event="click!addcount">click22</button>
 </body>
-<script type="text/javascript">
-    var drag = document.getElementById("drag");
-    var drop = document.getElementById("drop");
-    var flag = true;
-
-    drag.ondragstart = function(e){
-        console.info("dragstart");
-        e.dataTransfer.setData("Text", e.target.id);
-    };
-
-//    window.draggable = true;
-    window.ondragover = function(e){
-//        console.info(e.dataTransfer);
-        e.preventDefault();
-    };
-    window.ondrop = function(e){
-        var elid = e.dataTransfer.getData("Text");
-        var el = document.getElementById(elid);
-        el.style.position = "absolute";
-        el.style.left = getCurPos(e).x - parseInt(el.style.width.replace("px",""))/2+"px";
-        el.style.top = getCurPos(e).y- parseInt(el.style.height.replace("px",""))/2+"px" ;
-        e.target.appendChild(el);
-    };
-    drop.ondragenter = function(){
-        console.info("dragenter");
-    };
-    drag.ondragend = function(){
-        console.info("dragend");
-    };
-
-
-
-
-//    dragO.addEventListener("mousedown",function(){
-//        flag = true;
-//        document.onmouseup = function(){
-//            flag = false;
-//        };
-//        document.onmousemove = function(e){
-//           if(flag){
-//               dragO.style.position = "absolute";
-//               dragO.style.left = getCurPos(e).x - parseInt(dragO.style.width.replace("px",""))/2+"px";
-//               dragO.style.top = getCurPos(e).y- parseInt(dragO.style.height.replace("px",""))/2+"px" ;
-////               console.info(getCurPos(e));
-//               console.info(getObjPos(dragO));
-//           }
-//        };
-//
-//
-//    },false);
-//
-    function getCurPos(e){
-        e = e || window.event;
-        var D = document.documentElement;
-        if (e.pageX) return {x: e.pageX, y: e.pageY};
-        return {
-            x: e.clientX + D.scrollLeft - D.clientLeft,
-            y: e.clientY + D.scrollTop - D.clientTop
-        };
-    }
-    function getObjPos(obj)
-    {
-        var x = y = 0;
-        if (obj.getBoundingClientRect)
-        {
-            var box = obj.getBoundingClientRect();
-            var D = document.documentElement;
-            x = box.left + Math.max(D.scrollLeft, document.body.scrollLeft) - D.clientLeft;
-            y = box.top + Math.max(D.scrollTop, document.body.scrollTop) - D.clientTop;
-        }
-        else
-        {
-            for(; obj != document.body; x += obj.offsetLeft, y += obj.offsetTop, obj = obj.offsetParent );
-        }
-        return {'x':x, 'y':y};
-    }
-</script>
 </html>

@@ -1,36 +1,37 @@
 define(['#core'],function(core){
     var scope = core.registScope();
 
-    var event = {
-        regist : function(type, doms, handle){
-            //之所以不直接用jquery绑定，可以做一些特殊处理，封装一些额外的事件
-            $(doms).on(type,handle || function(){});
+    var isTouch = "ontouchstart" in window;
+
+    var eventTypes = {
+        "click" :   isTouch ? "touchstart" : "click",
+        "tap" :   isTouch ? "touchstart" : "click"
+    };
+
+    function eventAdapter(eventType,selector,handle){
+        var _e = eventTypes[eventType] || eventType;
+        $(document).off(_e).on(_e,selector,handle || function(){});
+    }
+
+    var Event = {
+        regist : function(type, selector, handle){
+            //之所以不直接用jquery绑定，可以做一些特殊处理，封装一些额外的事件(H5(touch&tap) & PC(click) 端事件)
+            eventAdapter(type, selector, handle);
         },
-        batchBinds : function(evts){
-            var doms = evts.doms;
-            var attr = evts.attr;
+        batchBinds : function(selectors){
+            var doms = $(selectors);
+            var attr = selectors;
+            var self = this;
             doms.each(function(i,e){
-                var type = $(e).attr(attr).split("!")[0];
-                var handler = $(e).attr(attr).split("!")[1];
-                $(e).off(type).on(type,function(evt){
+                var _attr = attr.replace(/\[|\]/g,"");
+                var type = $(e).attr(_attr).split("!")[0];
+                self.regist(type,attr,function(evt){
+                    var handler = $(this).attr("fcl-event").split("!")[1];
                     scope[handler]($(this),evt);
-
-                    //if the control
-                    if(attr.indexOf("control") != -1){
-                        var models = $("[fcl-model]");
-
-                        models.each(function(i,e){
-                            var model = $(e).attr("fcl-model");
-                            switch($(e)[0].nodeName.toLowerCase()){
-                                case 'input' : $(e).val(scope[model]);
-                            }
-                        });
-
-                    }
-                });
+                })
             });
         }
     };
 
-    return event;
+    return Event;
 });

@@ -9,66 +9,39 @@ define(['#event','#filter','jquery','#core'], function (evt , filter , $, core) 
 
     var build = {
         init : function(){
-            document.addEventListener("DOMNodeInserted", function () {
-                _fcls["eventDoms"] = $("[fcl-event]");
-                _fcls["controlDoms"] = $("[fcl-control]");
-                _fcls["modelDoms"] = $("[fcl-model]");
-                _fcls["dataDoms"] = $("[fcl-data]");
+            _fcls["eventDoms"] = "[fcl-event]";
+            _fcls["modelDoms"] = "[fcl-get]";
+            _fcls["dataDoms"] = "[fcl-set]";
 
-
-                _fcls.evtDoms = [{
-                    attr : 'fcl-event',
-                    doms : _fcls.eventDoms
-                },{
-                    attr : 'fcl-control',
-                    doms : _fcls.controlDoms
-                }];
-
-
-                build.initEvts(_fcls.evtDoms);
-                build.initModels(_fcls.modelDoms);
-                build.initData(_fcls.dataDoms);
-            }, false);
+            build.initEvts(_fcls.evtDoms);
+            build.initModels(_fcls.modelDoms);
+            build.initData(_fcls.dataDoms);
         },
         initEvts : function(evts){
-            for(var i=0;i<evts.length;i++){
-                evt.batchBinds(evts[i]);
-            }
+            evt.batchBinds(_fcls["eventDoms"]);
         },
         setModel : function(data){
-            //data = {
-            //    a : {
-            //        c : {
-            //            d : {
-            //                mangerName : "fouth"
-            //            }
-            //        },
-            //        mangerName : 'inner',
-            //        b : {
-            //            mangerName : "thrid"
-            //        }
-            //    },
-            //    _id : "adfasfasfdasfasdfasfd",
-            //    mangerName  : "outer"
-            //};
-
-            var dataDoms = _fcls.dataDoms;
+            var dataDoms = $(_fcls.dataDoms);
             var i = 0,m=data;//m == Model
             for(;i<dataDoms.length;i++){
                 var _dom = dataDoms[i],
-                    attrValue = $(_dom).attr("fcl-data"),
+                    attrValue = $(_dom).attr("fcl-set"),
                     attrIterator = attrValue.split("|")[0],
                     filterFn = attrValue.split("|")[1];
-
                 try{
-                    var dataValue = eval(attrIterator);
+                    var attrs = attrIterator.split(".");
+                    var concatObjs = "";
+                    for(var j = 0;j<attrs.length;j++){
+                        concatObjs += "['" + attrs[j] + "']";
+                    }
                     switch(_dom.nodeName.toLowerCase()){
                         case "input":
                         case "textarea" :
+                            var _value = eval("m" + concatObjs);
                             if(filterFn && typeof filter[filterFn] === 'function'){
-                                dataValue = filter[filterFn](dataValue);
+                                _value = filter[filterFn](_value);
                             }
-                            $(_dom).val(dataValue);
+                            $(_dom).val(_value);
                     }
                 }catch(e){
                     console.info(e);
@@ -77,7 +50,7 @@ define(['#event','#filter','jquery','#core'], function (evt , filter , $, core) 
         } ,
         initModels : function(modelDoms){
             evt.regist("input",modelDoms,function(evt){
-                scope[$(this).attr("fcl-model")] = $(this).val();
+                scope[$(this).attr("fcl-get")] = $(this).val();
             });    // 核心事件对象
         },
         initData : function(){
