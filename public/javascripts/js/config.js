@@ -12,7 +12,8 @@ require.config({
         '#util' : 'util',
         '#build' : 'build',
         '#filter' : 'filter',
-        '#grid' : '../widget/grid/grid!CSS'
+        '#grid' : '../widget/grid/grid!CSS',
+        '#scrollrefresh' : '../widget/scrollrefresh/scrollrefresh'
     },
     shim : {
         //'fcl.service' : ['#util','#core']

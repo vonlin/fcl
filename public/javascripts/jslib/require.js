@@ -35,6 +35,8 @@ var requirejs, require, define;
         globalDefQueue = [],
         useInteractive = false;
 
+    var csss = [];
+
     //Could match something like ')//comment', do not lose the prefix to comment.
     function commentReplace(match, multi, multiText, singlePrefix) {
         return singlePrefix || '';
@@ -1310,11 +1312,7 @@ var requirejs, require, define;
                         var cssUrl;
                         if(val.indexOf("!CSS") != -1){
                             cssUrl = val.replace("!CSS","").replace("widget/","") + ".css";
-                            var _css = document.createElement("link");
-                            _css.rel = "stylesheet";
-                            _css.href = cssUrl;
-                            _css.type = "text/css";
-                            document.getElementsByTagName("head")[0].appendChild(_css);
+                            csss.push(cssUrl);
                             value[p] = val.replace("!CSS","");
                         }
                     });
@@ -1420,6 +1418,18 @@ var requirejs, require, define;
 
                     if (options.enableBuildCallback && callback && isFunction(callback)) {
                         callback.__requireJsBuild = true;
+                    }
+
+                    for(var i=0;deps.length && i<deps.length;i++){
+                        for(var j=0;csss.length && j<csss.length;j++){
+                            if(csss[j].indexOf(deps[i].replace("#","")) != -1){
+                                var _css = document.createElement("link");
+                                _css.rel = "stylesheet";
+                                _css.href = csss[j];
+                                _css.type = "text/css";
+                                document.getElementsByTagName("head")[0].appendChild(_css);
+                            }
+                        }
                     }
 
                     if (typeof deps === 'string') {
