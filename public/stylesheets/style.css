@@ -31,5 +31,8 @@ a {
     float:right;
 }
 .g-hide{
-    display:none;
+    display:none!important;
+}
+.g-show{
+    display:block!important;
 }

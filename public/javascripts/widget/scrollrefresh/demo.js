@@ -3,7 +3,17 @@
  */
 
 require(['#scrollrefresh'],function(sr){
-    new sr("body",{
-        aniDom : 'img'
+    new sr("#scroll",{
+        //aniDom : "img",
+        pulldown : function(cb){
+            setTimeout(function(){
+                cb();
+            },3000);
+        },
+        pullup : function(cb){
+            setTimeout(function(){
+                cb();
+            },3000);
+        }
     });
 });
