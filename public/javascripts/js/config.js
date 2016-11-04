@@ -13,6 +13,7 @@ require.config({
         '#build' : 'build',
         '#filter' : 'filter',
         '#grid' : '../widget/grid/grid!CSS',
+        '#skb' : '../widget/skb/skb!CSS',
         '#scrollrefresh' : '../widget/scrollrefresh/scrollrefresh'
     },
     shim : {

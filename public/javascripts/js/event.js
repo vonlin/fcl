@@ -1,18 +1,36 @@
 define(['#core'],function(core){
     var scope = core.registScope();
-
+    var _startTime = 0,_endTime,longTime;
     var isTouch = "ontouchstart" in window;
 
     var eventTypes = {
         "click" :   isTouch ? "touchstart" : "click",
         "tap" :   isTouch ? "touchstart" : "click",
         "move" : isTouch ? "touchmove" : "mousemove",
-        "end" : isTouch ? "touchend" : "mouseout"
+        "end" : isTouch ? "touchend" : "mouseup",
+        "longTap" : "longTap"
     };
 
     function eventAdapter(eventType,selector,handle){
         var _e = eventTypes[eventType] || eventType;
-        $(document).off(_e).on(_e,selector,handle || function(){});
+        if(_e == 'longTap'){
+            //久按
+            Event.regist("end",selector,function(){
+                _endTime = new Date().getTime();
+                longTime = (_endTime - _startTime) / 1000;
+                if(longTime >=0.5 ){
+                    handle();
+                }
+            });
+        }else{
+            $(document).off(_e).on(_e,selector,function(e){
+                if(_e == eventTypes.click){
+                    _startTime = new Date().getTime();//记录开始点击时间
+                }
+
+                handle(e);
+            });
+        }
     }
 
     var Event = {
@@ -28,8 +46,18 @@ define(['#core'],function(core){
                 var _attr = attr.replace(/\[|\]/g,"");
                 var type = $(e).attr(_attr).split("!")[0];
                 self.regist(type,attr,function(evt){
-                    var handler = $(this).attr("fcl-event").split("!")[1];
-                    scope[handler]($(this),evt);
+                    var _attr = $(this).attr("fcl-event");
+                    var _hander = _attr.split("!")[1];
+                    var _type = _attr.split("!")[0];
+                    if(_type.indexOf(":") != -1){
+                        //绑定后代元素事件
+                        var subType = type.split(":");
+                        self.regist(subType[1],"[fcl-event='" + _attr + "'] " + subType[0],function(evt){
+                            scope[_hander]($(this),evt);
+                        })
+                    }else{
+                        scope[_hander]($(this),evt);
+                    }
                 })
             });
         },

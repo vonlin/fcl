@@ -4,7 +4,7 @@
 
 require(['#scrollrefresh'],function(sr){
     sr.init("#scroll",{
-        aniDom : "img",
+        //aniDom : "img",
         pulldown : function(cb){
             setTimeout(function(){
                 cb();
