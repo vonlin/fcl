@@ -23,7 +23,7 @@ define(['#core'],function(core){
                 }
             });
         }else{
-            $(document).off(_e).on(_e,selector,function(e){
+            $(document).off(_e,selector).on(_e,selector,function(e){
                 if(_e == eventTypes.click){
                     _startTime = new Date().getTime();//记录开始点击时间
                 }
@@ -46,7 +46,7 @@ define(['#core'],function(core){
                 var _attr = attr.replace(/\[|\]/g,"");
                 var type = $(e).attr(_attr).split("!")[0];
                 self.regist(type,attr,function(evt){
-                    var _attr = $(this).attr("fcl-event");
+                    var _attr = $(evt.target).attr("fcl-event");
                     var _hander = _attr.split("!")[1];
                     var _type = _attr.split("!")[0];
                     if(_type.indexOf(":") != -1){

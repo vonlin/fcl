@@ -39,3 +39,32 @@
 .kb-container table tr:last-child td:last-child{
     background:#e1e1e8;
 }
+
+.pw-table{
+     border: 1px solid grey;
+}
+.pw-table td{
+    text-align: center;
+    position:relative;
+    padding:0;
+    width:40px;
+    height:44px;
+}
+.pw-table tr td:not(:last-child)::before{
+    content:'';
+    position:absolute;
+    height:44px;
+    display:inline-block;
+    width:1px;
+    background-color:grey;
+    top:0;
+    right:0;
+}
+.pw-table td.inputed::after{
+    content:"\e629";
+    font-family: "iconfont" !important;
+    font-size:28px;
+    left:50%;
+    top:50%;
+    line-height: 44px;
+}
